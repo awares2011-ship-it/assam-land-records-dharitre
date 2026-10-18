@@ -1,4 +1,4 @@
-﻿# Build & release â€” Android APK + AAB
+# Build & release â€” Android APK + AAB
 
 ## 0 Â· Prerequisites
 
@@ -74,8 +74,8 @@ Upload this `.aab` to Play Console â†’ **Internal testing** or **Production
 
 | | |
 |---|---|
-| `applicationId` | `in.assam.dharitree` |
-| `versionCode` / `versionName` | `1` / `1.0.0` (bump both for every Play Store upload) |
+| `applicationId` | `com.asamland.info` |
+| `versionCode` / `versionName` | `1` / `1.1.0` (bump both for every Play Store upload) |
 | `minSdkVersion` | 23 (Android 6.0) â€” minimum for Google Mobile Ads 25.x |
 | `targetSdkVersion` / `compileSdk` | 34 / 35 (Android 14 / 15) |
 | `R8` | **enabled** for release â€” code + resource shrinking |

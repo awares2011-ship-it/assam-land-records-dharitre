@@ -42,17 +42,17 @@ export default function Home() {
 
   const greeting = useMemo(() => {
     const h = new Date().getHours();
-    if (lang === 'as') return h < 12 ? 'শুভ ৰাতিপুৱা' : h < 17 ? 'শুভ দুপৰীয়া' : 'শুভ সন্ধিয়া';
+    if (lang === 'as') return h < 12 ? 'à¦¶à§à¦­ à§°à¦¾à¦¤à¦¿à¦ªà§à§±à¦¾' : h < 17 ? 'à¦¶à§à¦­ à¦¦à§à¦ªà§°à§€à¦¯à¦¼à¦¾' : 'à¦¶à§à¦­ à¦¸à¦¨à§à¦§à¦¿à¦¯à¦¼à¦¾';
     return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   }, [lang]);
 
   const share = async () => {
     const data: ShareData = {
-      title: pick(lang, 'Assam Dharitree App', 'অসম ধৰিত্ৰী এপ', 'असम धरित्री ऐप'),
+      title: pick(lang, 'Assam Dharitree App', 'à¦…à¦¸à¦® à¦§à§°à¦¿à¦¤à§à§°à§€ à¦à¦ª', 'à¤…à¤¸à¤® à¤§à¤°à¤¿à¤¤à¥à¤°à¥€ à¤à¤ª'),
       text:  pick(lang,
-        'Instantly look up Assam land records, Jamabandi and government schemes — right from your phone.',
-        'অসমৰ যিকোনো ভূমিৰ জমাবন্দী আৰু অন্যান্য তথ্য এটা তাপতেই চাওক।',
-        'असम का कोई भी भूमि अभिलेख, जमाबंदी और सरकारी योजनाएँ — एक टैप में।',
+        'Instantly look up Assam land records, Jamabandi and government schemes â€” right from your phone.',
+        'à¦…à¦¸à¦®à§° à¦¯à¦¿à¦•à§‹à¦¨à§‹ à¦­à§‚à¦®à¦¿à§° à¦œà¦®à¦¾à¦¬à¦¨à§à¦¦à§€ à¦†à§°à§ à¦…à¦¨à§à¦¯à¦¾à¦¨à§à¦¯ à¦¤à¦¥à§à¦¯ à¦à¦Ÿà¦¾ à¦¤à¦¾à¦ªà¦¤à§‡à¦‡ à¦šà¦¾à¦“à¦•à¥¤',
+        'à¤…à¤¸à¤® à¤•à¤¾ à¤•à¥‹à¤ˆ à¤­à¥€ à¤­à¥‚à¤®à¤¿ à¤…à¤­à¤¿à¤²à¥‡à¤–, à¤œà¤®à¤¾à¤¬à¤‚à¤¦à¥€ à¤”à¤° à¤¸à¤°à¤•à¤¾à¤°à¥€ à¤¯à¥‹à¤œà¤¨à¤¾à¤à¤ â€” à¤à¤• à¤Ÿà¥ˆà¤ª à¤®à¥‡à¤‚à¥¤',
       ),
       url: 'https://dharitree.app/',
     };
@@ -60,7 +60,7 @@ export default function Home() {
       const nav = navigator as Navigator & { share?: (d: ShareData) => Promise<void> };
       if (nav.share) { await nav.share(data); return; }
       await navigator.clipboard.writeText(`${data.text} ${data.url}`);
-      alert(pick(lang, 'Link copied to clipboard!', 'লিংক কপি হ\'ল!', 'लिंक कॉपी हो गया!'));
+      alert(pick(lang, 'Link copied to clipboard!', 'à¦²à¦¿à¦‚à¦• à¦•à¦ªà¦¿ à¦¹\'à¦²!', 'à¤²à¤¿à¤‚à¤• à¤•à¥‰à¤ªà¥€ à¤¹à¥‹ à¤—à¤¯à¤¾!'));
     } catch { /* cancelled */ }
   };
 
@@ -82,7 +82,7 @@ export default function Home() {
 
   return (
     <div className="space-y-4">
-      {/* ───── TRUST-FORWARD HERO — violet → magenta → blue, mirrors the logo ───── */}
+      {/* â”€â”€â”€â”€â”€ TRUST-FORWARD HERO â€” violet â†’ magenta â†’ blue, mirrors the logo â”€â”€â”€â”€â”€ */}
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 via-magenta-500 to-blue-600 text-white p-5 shadow-pop">
         <div className="absolute -right-16 -top-20 w-64 h-64 rounded-full bg-white/10"/>
         <div className="absolute -left-10 -bottom-20 w-48 h-48 rounded-full bg-white/5"/>
@@ -91,14 +91,14 @@ export default function Home() {
           <div className="min-w-0">
             <div className="inline-flex items-center gap-1.5 text-[10px] font-semibold bg-white/15 backdrop-blur text-white rounded-full px-2.5 py-1 mb-2">
               <IconShield className="w-3 h-3"/>
-              {pick(lang, 'Live from Government Dharitree ILRMS', 'চৰকাৰী ধৰিত্ৰী ILRMS ৰ পৰা', 'सरकारी धरित्री ILRMS से लाइव')}
+              {pick(lang, 'Live from Government Dharitree ILRMS', 'à¦šà§°à¦•à¦¾à§°à§€ à¦§à§°à¦¿à¦¤à§à§°à§€ ILRMS à§° à¦ªà§°à¦¾', 'à¤¸à¤°à¤•à¤¾à¤°à¥€ à¤§à¤°à¤¿à¤¤à¥à¤°à¥€ ILRMS à¤¸à¥‡ à¤²à¤¾à¤‡à¤µ')}
             </div>
-            <p className="text-xs text-brand-100">{greeting} 👋</p>
+            <p className="text-xs text-brand-100">{greeting} ðŸ‘‹</p>
             <h1 className="text-[26px] font-extrabold leading-[1.1] mt-1 tracking-tight">
-              {pick(lang, 'Your Land Records', 'অসম ভূমি অভিলেখ', 'असम भूमि अभिलेख')}
+              {pick(lang, 'Your Land Records', 'à¦…à¦¸à¦® à¦­à§‚à¦®à¦¿ à¦…à¦­à¦¿à¦²à§‡à¦–', 'à¤…à¤¸à¤® à¤­à¥‚à¤®à¤¿ à¤…à¤­à¤¿à¤²à¥‡à¤–')}
             </h1>
             <p className="text-xs text-brand-100 mt-1 max-w-[16rem]">
-              {pick(lang, 'Jamabandi · Mutation · e-Khajana — in 60 seconds', 'জমাবন্দী, নামজাৰি, ই-খাজনা — ৬০ ছেকেণ্ডত', 'जमाबंदी · नामांतरण · ई-खजाना — 60 सेकंड में')}
+              {pick(lang, 'Jamabandi Â· Mutation Â· e-Khajana â€” in 60 seconds', 'à¦œà¦®à¦¾à¦¬à¦¨à§à¦¦à§€, à¦¨à¦¾à¦®à¦œà¦¾à§°à¦¿, à¦‡-à¦–à¦¾à¦œà¦¨à¦¾ â€” à§¬à§¦ à¦›à§‡à¦•à§‡à¦£à§à¦¡à¦¤', 'à¤œà¤®à¤¾à¤¬à¤‚à¤¦à¥€ Â· à¤¨à¤¾à¤®à¤¾à¤‚à¤¤à¤°à¤£ Â· à¤ˆ-à¤–à¤œà¤¾à¤¨à¤¾ â€” 60 à¤¸à¥‡à¤•à¤‚à¤¡ à¤®à¥‡à¤‚')}
             </p>
           </div>
           {weather && (
@@ -108,7 +108,7 @@ export default function Home() {
               aria-label="Weather"
             >
               <div className="text-2xl leading-none">{weather.emoji}</div>
-              <div className="text-base font-semibold leading-none mt-1">{weather.temp}°</div>
+              <div className="text-base font-semibold leading-none mt-1">{weather.temp}Â°</div>
               <div className="text-[10px] text-brand-100 mt-0.5 truncate max-w-[70px]">
                 {lang === 'en' ? weather.district : weather.district_as}
               </div>
@@ -127,31 +127,31 @@ export default function Home() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-base font-bold leading-tight">
-              {pick(lang, 'Search Land Record', 'ভূমি অভিলেখ সন্ধান', 'भूमि अभिलेख खोजें')}
+              {pick(lang, 'Search Land Record', 'à¦­à§‚à¦®à¦¿ à¦…à¦­à¦¿à¦²à§‡à¦– à¦¸à¦¨à§à¦§à¦¾à¦¨', 'à¤­à¥‚à¤®à¤¿ à¤…à¤­à¤¿à¤²à¥‡à¤– à¤–à¥‹à¤œà¥‡à¤‚')}
             </div>
             <div className="text-[11px] text-slate-500 mt-0.5">
-              {pick(lang, 'District → Circle → Village → Dag no', 'জিলা → চক্ৰ → গাঁও → দাগ নং', 'ज़िला → सर्कल → गाँव → दाग नं')}
+              {pick(lang, 'District â†’ Circle â†’ Village â†’ Dag no', 'à¦œà¦¿à¦²à¦¾ â†’ à¦šà¦•à§à§° â†’ à¦—à¦¾à¦à¦“ â†’ à¦¦à¦¾à¦— à¦¨à¦‚', 'à¤œà¤¼à¤¿à¤²à¤¾ â†’ à¤¸à¤°à¥à¤•à¤² â†’ à¤—à¤¾à¤à¤µ â†’ à¤¦à¤¾à¤— à¤¨à¤‚')}
             </div>
           </div>
-          <span className="text-brand-700 text-xl font-bold">›</span>
+          <span className="text-brand-700 text-xl font-bold">â€º</span>
         </Link>
 
         {/* Trust strip inside hero */}
         <div className="relative mt-3 grid grid-cols-3 gap-2 text-center text-white">
-          <Stat n={pick(lang, '30+', '৩০+', '30+')}       l={pick(lang, 'Districts', 'জিলা', 'ज़िले')} />
-          <Stat n={pick(lang, '100%', '১০০%', '100%')}     l={pick(lang, 'Official', 'চৰকাৰী', 'सरकारी')} />
-          <Stat n={pick(lang, 'Free', 'নিঃশুল্ক', 'मुफ़्त')} l={pick(lang, 'Forever', 'সদায়', 'हमेशा')} />
+          <Stat n={pick(lang, '30+', 'à§©à§¦+', '30+')}       l={pick(lang, 'Districts', 'à¦œà¦¿à¦²à¦¾', 'à¤œà¤¼à¤¿à¤²à¥‡')} />
+          <Stat n={pick(lang, '100%', 'à§§à§¦à§¦%', '100%')}     l={pick(lang, 'Official', 'à¦šà§°à¦•à¦¾à§°à§€', 'à¤¸à¤°à¤•à¤¾à¤°à¥€')} />
+          <Stat n={pick(lang, 'Free', 'à¦¨à¦¿à¦ƒà¦¶à§à¦²à§à¦•', 'à¤®à¥à¤«à¤¼à¥à¤¤')} l={pick(lang, 'Forever', 'à¦¸à¦¦à¦¾à¦¯à¦¼', 'à¤¹à¤®à¥‡à¤¶à¤¾')} />
         </div>
       </section>
 
-      {/* ───── FEATURE PREVIEW — "What you get" ───── */}
+      {/* â”€â”€â”€â”€â”€ FEATURE PREVIEW â€” "What you get" â”€â”€â”€â”€â”€ */}
       <section className="rounded-2xl bg-white border border-slate-100 shadow-card overflow-hidden">
         <div className="px-4 pt-3 pb-2 flex items-center justify-between">
           <h2 className="text-xs font-semibold text-slate-600 uppercase tracking-wider">
-            {pick(lang, "What you'll get", 'আপুনি কি পাব', 'आपको क्या मिलेगा')}
+            {pick(lang, "What you'll get", 'à¦†à¦ªà§à¦¨à¦¿ à¦•à¦¿ à¦ªà¦¾à¦¬', 'à¤†à¤ªà¤•à¥‹ à¤•à¥à¤¯à¤¾ à¤®à¤¿à¤²à¥‡à¤—à¤¾')}
           </h2>
           <Link to="/land-search" className="text-brand-700 text-[11px] font-semibold">
-            {pick(lang, 'Try now →', 'এতিয়াই চেষ্টা কৰক →', 'अभी आज़माएँ →')}
+            {pick(lang, 'Try now â†’', 'à¦à¦¤à¦¿à¦¯à¦¼à¦¾à¦‡ à¦šà§‡à¦·à§à¦Ÿà¦¾ à¦•à§°à¦• â†’', 'à¤…à¤­à¥€ à¤†à¤œà¤¼à¤®à¤¾à¤à¤ â†’')}
           </Link>
         </div>
         <div className="px-4 pb-4">
@@ -159,33 +159,33 @@ export default function Home() {
             <div className="px-3 py-2 bg-gradient-to-r from-brand-50 to-pink-50 border-b border-slate-100 flex items-center gap-2">
               <IconDoc className="w-4 h-4 text-brand-700"/>
               <span className="text-[12px] font-semibold text-brand-900">
-                {pick(lang, 'Jamabandi for Surveyed Village', 'জৰীপ হোৱা গাঁৱৰ জমাবন্দী', 'सर्वेक्षित गाँव की जमाबंदी')}
+                {pick(lang, 'Jamabandi for Surveyed Village', 'à¦œà§°à§€à¦ª à¦¹à§‹à§±à¦¾ à¦—à¦¾à¦à§±à§° à¦œà¦®à¦¾à¦¬à¦¨à§à¦¦à§€', 'à¤¸à¤°à¥à¤µà¥‡à¤•à¥à¤·à¤¿à¤¤ à¤—à¤¾à¤à¤µ à¤•à¥€ à¤œà¤®à¤¾à¤¬à¤‚à¤¦à¥€')}
               </span>
               <span className="ml-auto text-[9px] font-bold uppercase tracking-wider text-brand-700 bg-white/70 rounded px-1.5 py-0.5">
                 live
               </span>
             </div>
             <div className="p-3 text-[11px] text-slate-700 space-y-1">
-              <SampleRow k={pick(lang, 'District',   'জিলা',       'ज़िला')}      v="বৰপেটা"/>
-              <SampleRow k={pick(lang, 'Circle',     'চক্ৰ',       'सर्कल')}     v="বৰনগৰ"/>
-              <SampleRow k={pick(lang, 'Village',    'গাঁও',       'गाँव')}      v="ৰামপুৰ"/>
-              <SampleRow k={pick(lang, 'Patta type', 'পট্টাৰ ধৰণ', 'पट्टा प्रकार')} v="ম্যাদী"/>
-              <SampleRow k={pick(lang, 'Pattadar',   'পট্টাদাৰ',   'पट्टेदार')}   v="শ্ৰী চানোৰাম দাস …"/>
+              <SampleRow k={pick(lang, 'District',   'à¦œà¦¿à¦²à¦¾',       'à¤œà¤¼à¤¿à¤²à¤¾')}      v="à¦¬à§°à¦ªà§‡à¦Ÿà¦¾"/>
+              <SampleRow k={pick(lang, 'Circle',     'à¦šà¦•à§à§°',       'à¤¸à¤°à¥à¤•à¤²')}     v="à¦¬à§°à¦¨à¦—à§°"/>
+              <SampleRow k={pick(lang, 'Village',    'à¦—à¦¾à¦à¦“',       'à¤—à¤¾à¤à¤µ')}      v="à§°à¦¾à¦®à¦ªà§à§°"/>
+              <SampleRow k={pick(lang, 'Patta type', 'à¦ªà¦Ÿà§à¦Ÿà¦¾à§° à¦§à§°à¦£', 'à¤ªà¤Ÿà¥à¤Ÿà¤¾ à¤ªà¥à¤°à¤•à¤¾à¤°')} v="à¦®à§à¦¯à¦¾à¦¦à§€"/>
+              <SampleRow k={pick(lang, 'Pattadar',   'à¦ªà¦Ÿà§à¦Ÿà¦¾à¦¦à¦¾à§°',   'à¤ªà¤Ÿà¥à¤Ÿà¥‡à¤¦à¤¾à¤°')}   v="à¦¶à§à§°à§€ à¦šà¦¾à¦¨à§‹à§°à¦¾à¦® à¦¦à¦¾à¦¸ â€¦"/>
             </div>
             <div className="px-3 py-2 border-t border-slate-100 bg-slate-50 flex items-center gap-2 text-[10px] text-slate-500">
               <IconDownload className="w-3.5 h-3.5 text-brand-700"/>
-              <span>{pick(lang, 'Downloadable as PNG & PDF', 'PNG আৰু PDF হিচাপে ডাউনল\'ড', 'PNG और PDF के रूप में डाउनलोड')}</span>
+              <span>{pick(lang, 'Downloadable as PNG & PDF', 'PNG à¦†à§°à§ PDF à¦¹à¦¿à¦šà¦¾à¦ªà§‡ à¦¡à¦¾à¦‰à¦¨à¦²\'à¦¡', 'PNG à¤”à¤° PDF à¤•à¥‡ à¤°à¥‚à¤ª à¤®à¥‡à¤‚ à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡')}</span>
               <span className="ml-auto">ilrms.assam.gov.in</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ───── SERVICES — compact 2×3 ───── */}
+      {/* â”€â”€â”€â”€â”€ SERVICES â€” compact 2Ã—3 â”€â”€â”€â”€â”€ */}
       <section>
         <h2 className="px-1 mb-2 text-xs font-semibold text-slate-600 uppercase tracking-wider flex items-center gap-1">
           <IconBolt className="w-3.5 h-3.5 text-accent-500"/>
-          {pick(lang, 'More services', 'আৰু ভূমি সেৱা', 'और सेवाएँ')}
+          {pick(lang, 'More services', 'à¦†à§°à§ à¦­à§‚à¦®à¦¿ à¦¸à§‡à§±à¦¾', 'à¤”à¤° à¤¸à¥‡à¤µà¤¾à¤à¤')}
         </h2>
         <div className="grid grid-cols-3 gap-2">
           <Service to="/jamabandi" bg="bg-brand-100 text-brand-700"     title={t('svc.jamabandi')}  />
@@ -202,7 +202,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───── RATE / SHARE row — drives Play Store ranking ───── */}
+      {/* â”€â”€â”€â”€â”€ RATE / SHARE row â€” drives Play Store ranking â”€â”€â”€â”€â”€ */}
       {showRate && (
         <section className="rounded-2xl bg-gradient-to-r from-accent-400 via-magenta-500 to-brand-600 text-white p-4 shadow-pop relative">
           <button
@@ -210,7 +210,7 @@ export default function Home() {
             aria-label="Dismiss"
             className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/20 text-white grid place-items-center text-xs"
           >
-            ✕
+            âœ•
           </button>
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-white/20 grid place-items-center">
@@ -218,21 +218,21 @@ export default function Home() {
             </div>
             <div className="flex-1">
               <h4 className="text-sm font-bold">
-                {pick(lang, 'Love the app? Rate us 5 stars', 'এপটো ভাল পালে ৫ তৰা দিয়ক', 'ऐप पसंद आया? 5 स्टार रेटिंग दें')}
+                {pick(lang, 'Love the app? Rate us 5 stars', 'à¦à¦ªà¦Ÿà§‹ à¦­à¦¾à¦² à¦ªà¦¾à¦²à§‡ à§« à¦¤à§°à¦¾ à¦¦à¦¿à¦¯à¦¼à¦•', 'à¤à¤ª à¤ªà¤¸à¤‚à¤¦ à¤†à¤¯à¤¾? 5 à¤¸à¥à¤Ÿà¤¾à¤° à¤°à¥‡à¤Ÿà¤¿à¤‚à¤— à¤¦à¥‡à¤‚')}
               </h4>
               <p className="text-[11px] text-white/90 mt-0.5">
-                {pick(lang, 'Your rating helps other farmers find us.', 'আপোনাৰ ৰেটিঙে অইনক সহায় কৰিব।', 'आपकी रेटिंग अन्य किसानों को हमें ढूँढने में मदद करेगी।')}
+                {pick(lang, 'Your rating helps other farmers find us.', 'à¦†à¦ªà§‹à¦¨à¦¾à§° à§°à§‡à¦Ÿà¦¿à¦™à§‡ à¦…à¦‡à¦¨à¦• à¦¸à¦¹à¦¾à¦¯à¦¼ à¦•à§°à¦¿à¦¬à¥¤', 'à¤†à¤ªà¤•à¥€ à¤°à¥‡à¤Ÿà¤¿à¤‚à¤— à¤…à¤¨à¥à¤¯ à¤•à¤¿à¤¸à¤¾à¤¨à¥‹à¤‚ à¤•à¥‹ à¤¹à¤®à¥‡à¤‚ à¤¢à¥‚à¤à¤¢à¤¨à¥‡ à¤®à¥‡à¤‚ à¤®à¤¦à¤¦ à¤•à¤°à¥‡à¤—à¥€à¥¤')}
               </p>
             </div>
           </div>
           <div className="flex gap-2 mt-3">
             <button
               type="button"
-              onClick={() => { dismissRate(); window.open('https://play.google.com/store/apps/details?id=in.assam.dharitree', '_blank'); }}
+              onClick={() => { dismissRate(); window.open('https://play.google.com/store/apps/details?id=com.asamland.info', '_blank'); }}
               className="flex-1 h-10 rounded-xl bg-white text-brand-700 font-semibold text-sm active:scale-[0.98] flex items-center justify-center gap-1"
             >
               <IconStar className="w-4 h-4"/>
-              {pick(lang, 'Rate on Play Store', 'ৰেট কৰক', 'Play Store पर रेट करें')}
+              {pick(lang, 'Rate on Play Store', 'à§°à§‡à¦Ÿ à¦•à§°à¦•', 'Play Store à¤ªà¤° à¤°à¥‡à¤Ÿ à¤•à¤°à¥‡à¤‚')}
             </button>
             <button
               type="button"
@@ -246,28 +246,28 @@ export default function Home() {
         </section>
       )}
 
-      {/* ───── TRUST FOOTER ───── */}
+      {/* â”€â”€â”€â”€â”€ TRUST FOOTER â”€â”€â”€â”€â”€ */}
       <section className="rounded-2xl bg-slate-900 text-slate-200 p-4 text-[11px] space-y-1.5">
         <div className="flex items-center gap-2 text-white font-semibold text-xs">
           <IconShield className="w-4 h-4 text-brand-300"/>
-          {pick(lang, 'Secure & private', 'নিৰাপদ আৰু গোপনীয়', 'सुरक्षित और निजी')}
+          {pick(lang, 'Secure & private', 'à¦¨à¦¿à§°à¦¾à¦ªà¦¦ à¦†à§°à§ à¦—à§‹à¦ªà¦¨à§€à¦¯à¦¼', 'à¤¸à¥à¤°à¤•à¥à¤·à¤¿à¤¤ à¤”à¤° à¤¨à¤¿à¤œà¥€')}
         </div>
         <p className="text-slate-400 leading-relaxed">
           {lang === 'as'
-            ? 'কোনো তথ্য কেন্দ্ৰীভূত ছাৰ্ভাৰত ৰখা নহয়। সকলো অনুৰোধ পোনে পোনে চৰকাৰী ধৰিত্ৰী পৰ্টেললৈ যায়। কেপচা আপুনিয়ে পূৰণ কৰে।'
+            ? 'à¦•à§‹à¦¨à§‹ à¦¤à¦¥à§à¦¯ à¦•à§‡à¦¨à§à¦¦à§à§°à§€à¦­à§‚à¦¤ à¦›à¦¾à§°à§à¦­à¦¾à§°à¦¤ à§°à¦–à¦¾ à¦¨à¦¹à¦¯à¦¼à¥¤ à¦¸à¦•à¦²à§‹ à¦…à¦¨à§à§°à§‹à¦§ à¦ªà§‹à¦¨à§‡ à¦ªà§‹à¦¨à§‡ à¦šà§°à¦•à¦¾à§°à§€ à¦§à§°à¦¿à¦¤à§à§°à§€ à¦ªà§°à§à¦Ÿà§‡à¦²à¦²à§ˆ à¦¯à¦¾à¦¯à¦¼à¥¤ à¦•à§‡à¦ªà¦šà¦¾ à¦†à¦ªà§à¦¨à¦¿à¦¯à¦¼à§‡ à¦ªà§‚à§°à¦£ à¦•à§°à§‡à¥¤'
             : 'No data is stored on any server. Every request goes straight to the official Dharitree portal, and you solve the CAPTCHA yourself.'}
         </p>
       </section>
 
       <footer className="pt-1 pb-4 text-[10px] text-slate-400 text-center flex items-center justify-center gap-2">
         <AppLogo className="w-4 h-4 rounded-md" />
-        v1.0 · {t('app.unofficial')}
+        v1.0 Â· {t('app.unofficial')}
       </footer>
     </div>
   );
 }
 
-/* ───── Small bits ───── */
+/* â”€â”€â”€â”€â”€ Small bits â”€â”€â”€â”€â”€ */
 
 function Stat({ n, l }: { n: string; l: string }) {
   return (
@@ -307,15 +307,15 @@ function Service({
 
 function IconFor({ title }: { title: string }) {
   const t = title.toLowerCase();
-  if (/jama|মজাবন্দী|জমাবন্দী/.test(t)) return <IconDoc className="w-5 h-5"/>;
-  if (/mut|নামজাৰি/.test(t))            return <IconDoc className="w-5 h-5"/>;
-  if (/basu|বসুন্ধৰা/.test(t))           return <IconLayers className="w-5 h-5"/>;
-  if (/bhu|map|মানচিত্ৰ/.test(t))        return <IconMap className="w-5 h-5"/>;
-  if (/khaj|খাজনা/.test(t))             return <IconScheme className="w-5 h-5"/>;
-  if (/calc|হিচাপ/.test(t))             return <IconCalc className="w-5 h-5"/>;
-  if (/sche|আঁচনি/.test(t))             return <IconScheme className="w-5 h-5"/>;
-  if (/weath|বতৰ/.test(t))              return <IconWeather className="w-5 h-5"/>;
-  if (/news|বাতৰি/.test(t))             return <IconDoc className="w-5 h-5"/>;
+  if (/jama|à¦®à¦œà¦¾à¦¬à¦¨à§à¦¦à§€|à¦œà¦®à¦¾à¦¬à¦¨à§à¦¦à§€/.test(t)) return <IconDoc className="w-5 h-5"/>;
+  if (/mut|à¦¨à¦¾à¦®à¦œà¦¾à§°à¦¿/.test(t))            return <IconDoc className="w-5 h-5"/>;
+  if (/basu|à¦¬à¦¸à§à¦¨à§à¦§à§°à¦¾/.test(t))           return <IconLayers className="w-5 h-5"/>;
+  if (/bhu|map|à¦®à¦¾à¦¨à¦šà¦¿à¦¤à§à§°/.test(t))        return <IconMap className="w-5 h-5"/>;
+  if (/khaj|à¦–à¦¾à¦œà¦¨à¦¾/.test(t))             return <IconScheme className="w-5 h-5"/>;
+  if (/calc|à¦¹à¦¿à¦šà¦¾à¦ª/.test(t))             return <IconCalc className="w-5 h-5"/>;
+  if (/sche|à¦†à¦à¦šà¦¨à¦¿/.test(t))             return <IconScheme className="w-5 h-5"/>;
+  if (/weath|à¦¬à¦¤à§°/.test(t))              return <IconWeather className="w-5 h-5"/>;
+  if (/news|à¦¬à¦¾à¦¤à§°à¦¿/.test(t))             return <IconDoc className="w-5 h-5"/>;
   return <IconDoc className="w-5 h-5"/>;
 }
 
@@ -328,7 +328,7 @@ function IconShield({ className }: { className?: string }) {
   );
 }
 
-/* ───── Onboarding — first launch only ───── */
+/* â”€â”€â”€â”€â”€ Onboarding â€” first launch only â”€â”€â”€â”€â”€ */
 
 function Onboarding({ onDone }: { onDone: () => void }) {
   const { lang, setLang } = useI18n();
@@ -336,38 +336,38 @@ function Onboarding({ onDone }: { onDone: () => void }) {
   const slides = [
     {
       bg: 'from-brand-700 via-magenta-600 to-blue-700',
-      emoji: '🌾',
-      title: pick(lang, 'Assam Land Records', 'অসমৰ ভূমি অভিলেখ', 'असम भूमि अभिलेख'),
+      emoji: 'ðŸŒ¾',
+      title: pick(lang, 'Assam Land Records', 'à¦…à¦¸à¦®à§° à¦­à§‚à¦®à¦¿ à¦…à¦­à¦¿à¦²à§‡à¦–', 'à¤…à¤¸à¤® à¤­à¥‚à¤®à¤¿ à¤…à¤­à¤¿à¤²à¥‡à¤–'),
       body:  pick(lang,
-        'Jamabandi, mutation, e-Khajana — all in one app.',
-        'জমাবন্দী, নামজাৰি, ই-খাজনা — এটা এপতেই।',
-        'जमाबंदी, नामांतरण, ई-खजाना — एक ही ऐप में।'),
+        'Jamabandi, mutation, e-Khajana â€” all in one app.',
+        'à¦œà¦®à¦¾à¦¬à¦¨à§à¦¦à§€, à¦¨à¦¾à¦®à¦œà¦¾à§°à¦¿, à¦‡-à¦–à¦¾à¦œà¦¨à¦¾ â€” à¦à¦Ÿà¦¾ à¦à¦ªà¦¤à§‡à¦‡à¥¤',
+        'à¤œà¤®à¤¾à¤¬à¤‚à¤¦à¥€, à¤¨à¤¾à¤®à¤¾à¤‚à¤¤à¤°à¤£, à¤ˆ-à¤–à¤œà¤¾à¤¨à¤¾ â€” à¤à¤• à¤¹à¥€ à¤à¤ª à¤®à¥‡à¤‚à¥¤'),
     },
     {
       bg: 'from-sky-500 to-sky-800',
-      emoji: '📄',
+      emoji: 'ðŸ“„',
       title: pick(lang,
         'Live from the official portal',
-        'চৰকাৰী ছাইটৰ পৰা পোনে পোনে',
-        'सरकारी पोर्टल से सीधा'),
+        'à¦šà§°à¦•à¦¾à§°à§€ à¦›à¦¾à¦‡à¦Ÿà§° à¦ªà§°à¦¾ à¦ªà§‹à¦¨à§‡ à¦ªà§‹à¦¨à§‡',
+        'à¤¸à¤°à¤•à¤¾à¤°à¥€ à¤ªà¥‹à¤°à¥à¤Ÿà¤² à¤¸à¥‡ à¤¸à¥€à¤§à¤¾'),
       body:  pick(lang,
-        'Instant results from Dharitree ILRMS — never any fake data.',
-        'ধৰিত্ৰী ILRMS ৰ পৰা তৎকালিক ফলাফল। কোনো মিছা তথ্য নাই।',
-        'धरित्री ILRMS से तुरंत परिणाम। कोई नकली डेटा नहीं।'),
+        'Instant results from Dharitree ILRMS â€” never any fake data.',
+        'à¦§à§°à¦¿à¦¤à§à§°à§€ ILRMS à§° à¦ªà§°à¦¾ à¦¤à§Žà¦•à¦¾à¦²à¦¿à¦• à¦«à¦²à¦¾à¦«à¦²à¥¤ à¦•à§‹à¦¨à§‹ à¦®à¦¿à¦›à¦¾ à¦¤à¦¥à§à¦¯ à¦¨à¦¾à¦‡à¥¤',
+        'à¤§à¤°à¤¿à¤¤à¥à¤°à¥€ ILRMS à¤¸à¥‡ à¤¤à¥à¤°à¤‚à¤¤ à¤ªà¤°à¤¿à¤£à¤¾à¤®à¥¤ à¤•à¥‹à¤ˆ à¤¨à¤•à¤²à¥€ à¤¡à¥‡à¤Ÿà¤¾ à¤¨à¤¹à¥€à¤‚à¥¤'),
     },
     {
       bg: 'from-rose-500 to-rose-800',
-      emoji: '⬇️',
-      title: pick(lang, 'Download as PNG & PDF', 'PNG আৰু PDF ডাউনল\'ড', 'PNG और PDF डाउनलोड करें'),
+      emoji: 'â¬‡ï¸',
+      title: pick(lang, 'Download as PNG & PDF', 'PNG à¦†à§°à§ PDF à¦¡à¦¾à¦‰à¦¨à¦²\'à¦¡', 'PNG à¤”à¤° PDF à¤¡à¤¾à¤‰à¤¨à¤²à¥‹à¤¡ à¤•à¤°à¥‡à¤‚'),
       body:  pick(lang,
         'Save, print and share any record.',
-        'সঞ্চয় কৰক, ছপা কৰক, শ্বেয়াৰ কৰক।',
-        'कोई भी अभिलेख सहेजें, प्रिंट करें और साझा करें।'),
+        'à¦¸à¦žà§à¦šà¦¯à¦¼ à¦•à§°à¦•, à¦›à¦ªà¦¾ à¦•à§°à¦•, à¦¶à§à¦¬à§‡à¦¯à¦¼à¦¾à§° à¦•à§°à¦•à¥¤',
+        'à¤•à¥‹à¤ˆ à¤­à¥€ à¤…à¤­à¤¿à¤²à¥‡à¤– à¤¸à¤¹à¥‡à¤œà¥‡à¤‚, à¤ªà¥à¤°à¤¿à¤‚à¤Ÿ à¤•à¤°à¥‡à¤‚ à¤”à¤° à¤¸à¤¾à¤à¤¾ à¤•à¤°à¥‡à¤‚à¥¤'),
     },
   ];
   const s = slides[i];
   const nextLang = lang === 'en' ? 'as' : lang === 'as' ? 'hi' : 'en';
-  const nextLangLabel = nextLang === 'as' ? 'অসমীয়া' : nextLang === 'hi' ? 'हिन्दी' : 'English';
+  const nextLangLabel = nextLang === 'as' ? 'à¦…à¦¸à¦®à§€à¦¯à¦¼à¦¾' : nextLang === 'hi' ? 'à¤¹à¤¿à¤¨à¥à¤¦à¥€' : 'English';
   return (
     <div className={`rounded-3xl bg-gradient-to-br ${s.bg} text-white p-6 min-h-[70vh] flex flex-col shadow-pop`}>
       <div className="flex items-center justify-between">
@@ -379,7 +379,7 @@ function Onboarding({ onDone }: { onDone: () => void }) {
           {nextLangLabel}
         </button>
         <button type="button" onClick={onDone} className="text-xs font-semibold text-white/80">
-          {pick(lang, 'Skip', 'এৰি দিয়ক', 'छोड़ें')}
+          {pick(lang, 'Skip', 'à¦à§°à¦¿ à¦¦à¦¿à¦¯à¦¼à¦•', 'à¤›à¥‹à¤¡à¤¼à¥‡à¤‚')}
         </button>
       </div>
 
@@ -408,8 +408,8 @@ function Onboarding({ onDone }: { onDone: () => void }) {
         className="w-full h-12 rounded-2xl bg-white text-slate-900 font-bold text-base shadow-pop active:scale-[0.98]"
       >
         {i < slides.length - 1
-          ? pick(lang, 'Next', 'পৰৱৰ্তী', 'अगला')
-          : pick(lang, 'Get started', 'আৰম্ভ কৰক', 'शुरू करें')}
+          ? pick(lang, 'Next', 'à¦ªà§°à§±à§°à§à¦¤à§€', 'à¤…à¤—à¤²à¤¾')
+          : pick(lang, 'Get started', 'à¦†à§°à¦®à§à¦­ à¦•à§°à¦•', 'à¤¶à¥à¤°à¥‚ à¤•à¤°à¥‡à¤‚')}
       </button>
     </div>
   );

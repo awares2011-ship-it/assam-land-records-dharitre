@@ -1,4 +1,4 @@
-﻿# Privacy Policy â€” Assam Land Records (Dharitre)
+# Privacy Policy â€” Assam Land Records (Dharitre)
 
 **Last updated: 18 October 2026**
 

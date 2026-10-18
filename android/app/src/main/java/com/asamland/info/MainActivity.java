@@ -1,4 +1,4 @@
-package in.assam.dharitree;
+package com.asamland.info;
 
 import com.getcapacitor.BridgeActivity;
 

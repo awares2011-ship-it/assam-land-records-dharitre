@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'in.assam.dharitree',
-  appName: 'Assam Land Records – Dharitre',
+  appId: 'com.asamland.info',
+  appName: 'Assam Land Records â€“ Dharitre',
   webDir: 'dist',
   server: {
     androidScheme: 'https',
@@ -14,7 +14,7 @@ const config: CapacitorConfig = {
     // Route window.fetch & XMLHttpRequest through the native HTTP stack on
     // Android/iOS. This bypasses browser-WebView CORS so the app can call
     // ilrms.assam.gov.in directly and keep its session cookies in the native
-    // cookie jar — no backend server needed.
+    // cookie jar â€” no backend server needed.
     CapacitorHttp: {
       enabled: true,
     },

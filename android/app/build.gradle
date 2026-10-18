@@ -20,14 +20,14 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "in.assam.dharitree"
+    namespace "com.asamland.info"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "in.assam.dharitree"
+        applicationId "com.asamland.info"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations += ['en', 'as', 'hi']
         aaptOptions {
@@ -47,7 +47,7 @@ android {
     }
     buildTypes {
         debug {
-            // debuggable + default debug signing key — produces an installable APK
+            // debuggable + default debug signing key â€” produces an installable APK
         }
         release {
             minifyEnabled true
