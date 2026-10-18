@@ -47,6 +47,10 @@ const APP_OPEN_LAUNCH_DELAY_MS = 1_500;
 const REWARD_UNLOCK_MS = 10 * 60_000;
 const FULLSCREEN_TIMEOUT_MS = 120_000;
 const BANNER_RESERVE_DP = 50;
+const INIT_MAX_ATTEMPTS = 3;
+const BANNER_MAX_ATTEMPTS = 4;
+const INIT_RETRY_MS = 2_000;
+const BANNER_RETRY_MS = 12_000;
 
 const isTesting = import.meta.env.DEV;
 
@@ -68,9 +72,69 @@ let appOpenShownAt = 0;
 let lastRewardAt = 0;
 let appOpenScheduled = false;
 let interstitialPreload: Promise<boolean> | null = null;
+let bannerAttempts = 0;
+let bannerRetryTimer: number | null = null;
 
 function setBannerReserve(height: number) {
   document.documentElement.style.setProperty('--ad-banner-h', `${height}px`);
+}
+
+function bannerErrorText(e: unknown): string {
+  if (e && typeof e === 'object' && 'message' in e) return String((e as { message: unknown }).message);
+  return String(e);
+}
+
+function showBannerNow(): void {
+  void AdMob.showBanner({
+    adId: AD_UNITS.banner,
+    adSize: BannerAdSize.BANNER,
+    position: BannerAdPosition.BOTTOM_CENTER,
+    isTesting,
+  })
+    .then(() => setBannerReserve(BANNER_RESERVE_DP))
+    .catch((e) => {
+      console.warn('[ads] showBanner failed:', bannerErrorText(e));
+      setBannerReserve(0);
+      scheduleBannerRetry();
+    });
+}
+
+function scheduleBannerRetry(): void {
+  if (bannerAttempts >= BANNER_MAX_ATTEMPTS || bannerRetryTimer !== null) return;
+  bannerAttempts += 1;
+  console.info(`[ads] banner retry ${bannerAttempts}/${BANNER_MAX_ATTEMPTS} in ${BANNER_RETRY_MS}ms`);
+  bannerRetryTimer = window.setTimeout(() => {
+    bannerRetryTimer = null;
+    showBannerNow();
+  }, BANNER_RETRY_MS);
+}
+
+function listenBannerEvents(): void {
+  void AdMob.addListener(BannerAdPluginEvents.Loaded, () => {
+    console.info('[ads] banner loaded');
+    bannerAttempts = 0;
+  });
+  void AdMob.addListener(BannerAdPluginEvents.FailedToLoad, (err: unknown) => {
+    console.warn('[ads] banner failed to load:', bannerErrorText(err));
+    setBannerReserve(0);
+    scheduleBannerRetry();
+  });
+  void AdMob.addListener(BannerAdPluginEvents.SizeChanged, (size: { width: number; height: number }) => {
+    setBannerReserve(size.height > 0 ? size.height : 0);
+  });
+}
+
+async function initializeWithRetry(): Promise<boolean> {
+  for (let i = 0; i < INIT_MAX_ATTEMPTS; i++) {
+    try {
+      await AdMob.initialize({ maxAdContentRating: MaxAdContentRating.ParentalGuidance });
+      return true;
+    } catch (e) {
+      console.warn(`[ads] initialize attempt ${i + 1}/${INIT_MAX_ATTEMPTS} failed:`, bannerErrorText(e));
+      await new Promise((r) => setTimeout(r, INIT_RETRY_MS * (i + 1)));
+    }
+  }
+  return false;
 }
 
 export function initAds(): Promise<void> {
@@ -88,27 +152,13 @@ export function initAds(): Promise<void> {
       // Region without a configured UMP message — continue.
     }
 
-    try {
-      await AdMob.initialize({ maxAdContentRating: MaxAdContentRating.ParentalGuidance });
-    } catch {
-      return;
-    }
+    const initialized = await initializeWithRetry();
+    if (!initialized) return;
     ready = true;
+    console.info('[ads] AdMob initialized');
 
-    try {
-      await AdMob.showBanner({
-        adId: AD_UNITS.banner,
-        adSize: BannerAdSize.BANNER,
-        position: BannerAdPosition.BOTTOM_CENTER,
-        isTesting,
-      });
-      setBannerReserve(BANNER_RESERVE_DP);
-      void AdMob.addListener(BannerAdPluginEvents.SizeChanged, (size: { width: number; height: number }) => {
-        setBannerReserve(size.height > 0 ? size.height : 0);
-      });
-    } catch {
-      setBannerReserve(0);
-    }
+    listenBannerEvents();
+    showBannerNow();
 
     preloadInterstitial();
     // AppOpenAdOptions has no test flag — skip the app-open ad entirely in
@@ -149,8 +199,12 @@ export function scheduleAppOpenOnLaunch(): void {
 function preloadInterstitial(): void {
   if (!ready) return;
   interstitialPreload = AdMob.prepareInterstitial({ adId: AD_UNITS.interstitial, isTesting })
-    .then(() => true)
-    .catch(() => {
+    .then(() => {
+      console.info('[ads] interstitial preloaded');
+      return true;
+    })
+    .catch((e) => {
+      console.warn('[ads] interstitial preload failed:', bannerErrorText(e));
       interstitialPreload = null;
       return false;
     });
