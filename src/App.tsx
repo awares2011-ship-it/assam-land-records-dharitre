@@ -1,5 +1,7 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import AppShell from './components/AppShell';
+import { initAds, onNavigate, scheduleAppOpenOnLaunch } from './services/ads';
 import Home from './pages/Home';
 import LandSearch from './pages/LandSearch';
 import Calculator from './pages/Calculator';
@@ -24,6 +26,22 @@ import SavedServices from './pages/SavedServices';
 import NotificationsPage from './pages/Notifications';
 
 export default function App() {
+  const loc = useLocation();
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    void initAds();
+    scheduleAppOpenOnLaunch();
+  }, []);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    onNavigate();
+  }, [loc.pathname]);
+
   return (
     <AppShell>
       <Routes>

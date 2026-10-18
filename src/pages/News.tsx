@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import { useI18n } from '../i18n/I18nProvider';
 import { fetchFeed, feeds, type FeedItem, type FeedKey } from '../services/news';
 import { openOfficial } from '../components/OfficialLink';
 import { IconNews, IconExternal } from '../components/Icon';
+import { AD_UNITS, isNativePlatform, NativeAdFeed, NativeAdTemplate } from '../services/ads';
+import { NativeAdPluginEvents } from '@capacitor-community/admob';
+
+type NativeSlotState = 'hidden' | 'visible' | 'failed';
 
 export default function News() {
   const { t, lang } = useI18n();
@@ -11,6 +15,8 @@ export default function News() {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [state, setState] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle');
   const [err, setErr] = useState<string>('');
+  const [nativeSlot, setNativeSlot] = useState<NativeSlotState>('hidden');
+  const slotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -25,6 +31,65 @@ export default function News() {
       });
     return () => { active = false; };
   }, [key]);
+
+  useEffect(() => {
+    if (!isNativePlatform()) return;
+    const slot = slotRef.current;
+    if (!slot) return;
+
+    let feed: NativeAdFeed | undefined;
+    let cancelled = false;
+    let slotFailed = false;
+    let slotLoaded = false;
+    const failTimer = window.setTimeout(() => {
+      if (!cancelled && !slotLoaded && !slotFailed) {
+        slotFailed = true;
+        setNativeSlot('failed');
+      }
+    }, 15_000);
+
+    NativeAdFeed.create({
+      feedId: 'news-native-feed',
+      adId: AD_UNITS.native,
+      template: NativeAdTemplate.Small,
+      isTesting: import.meta.env.DEV,
+    })
+      .then(async (f) => {
+        if (cancelled) {
+          await f.destroy().catch(() => undefined);
+          return;
+        }
+        feed = f;
+        await f.addListener(NativeAdPluginEvents.Loaded, () => {
+          if (!cancelled && !slotFailed) {
+            slotLoaded = true;
+            setNativeSlot('visible');
+          }
+        }).catch(() => undefined);
+        await f.addListener(NativeAdPluginEvents.FailedToLoad, () => {
+          if (!cancelled) {
+            slotFailed = true;
+            setNativeSlot('failed');
+          }
+        }).catch(() => undefined);
+        f.attach('news-1', slot);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          slotFailed = true;
+          setNativeSlot('failed');
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(failTimer);
+      if (feed) {
+        try { feed.detach(slot); } catch { /* already detached */ }
+        void feed.destroy().catch(() => undefined);
+      }
+    };
+  }, []);
 
   return (
     <div className="space-y-4">
@@ -42,6 +107,20 @@ export default function News() {
           ))}
         </select>
       </section>
+
+      {/* Sponsored native ad slot — collapsed until the SDK reports a fill. */}
+      <div
+        ref={slotRef}
+        aria-hidden={nativeSlot !== 'visible'}
+        className="m3-card overflow-hidden"
+        style={{
+          height: nativeSlot === 'failed' ? 0 : 118,
+          opacity: nativeSlot === 'visible' ? 1 : 0,
+          transition: 'opacity 250ms ease',
+          padding: 0,
+          border: nativeSlot === 'visible' ? undefined : 'none',
+        }}
+      />
 
       {state === 'loading' && (
         <div className="m3-card p-5 text-sm text-slate-500">{t('common.loading')}</div>

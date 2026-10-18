@@ -1,6 +1,7 @@
 ext {
-    minSdkVersion = 22
-    compileSdkVersion = 34
+    // Google Mobile Ads 25.x requires minSdk 23 (Android 6.0)
+    minSdkVersion = 23
+    compileSdkVersion = 35
     targetSdkVersion = 34
     androidxActivityVersion = '1.8.0'
     androidxAppCompatVersion = '1.6.1'

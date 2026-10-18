@@ -1,21 +1,21 @@
-# Privacy Policy — Assam Land Records (Dharitre)
+﻿# Privacy Policy â€” Assam Land Records (Dharitre)
 
 **Last updated: 18 October 2026**
 
-Assam Land Records – Dharitre ("the App") is an **unofficial, independent** companion app for viewing public land records of Assam through the Government of Assam's ILRMS/Dharitree portal. The App is **not affiliated with, endorsed by, or operated by** the Government of Assam or any of its departments.
+Assam Land Records â€“ Dharitre ("the App") is an **unofficial, independent** companion app for viewing public land records of Assam through the Government of Assam's ILRMS/Dharitree portal. The App is **not affiliated with, endorsed by, or operated by** the Government of Assam or any of its departments.
 
 ## Summary
 
-- The App has **no user accounts**, **no ads**, and **no analytics or tracking** of any kind.
-- The App does **not collect, transmit, or sell any personal data** to the developer.
+- The App has **no user accounts** and **no analytics**. It does contain **ads** (see Advertising below).
+- The App does **not collect, transmit, or sell personal data** to the developer.
 - Your searches, saved items, settings, and exported documents **stay on your device**.
-- The App only contacts third-party services to fetch the public content you explicitly request (land records, weather, news).
+- Third-party services are contacted only for public content you explicitly request, plus Google AdMob to display ads.
 
 ## Information the App accesses
 
 ### Land record searches (official government portal)
 
-When you perform a land search, the App sends your search parameters — district, subdivision, circle, mouza, lot/village, **dag number**, **patta type**, and the **CAPTCHA answer** — directly from your device to the official Government of Assam portal at `ilrms.assam.gov.in`, using the App's built-in HTTP stack. Session cookies required by that portal are stored locally in the App's native cookie jar on your device.
+When you perform a land search, the App sends your search parameters â€” district, subdivision, circle, mouza, lot/village, **dag number**, **patta type**, and the **CAPTCHA answer** â€” directly from your device to the official Government of Assam portal at `ilrms.assam.gov.in`, using the App's built-in HTTP stack. Session cookies required by that portal are stored locally in the App's native cookie jar on your device.
 
 - The developer **never receives** this information.
 - Search results are held in memory for display only and are **not saved** unless *you* choose to export them.
@@ -32,6 +32,15 @@ If you use the news feature, the App fetches public RSS news feeds through the t
 ### External links
 
 Links to official websites (Basundhara, DLRS, e-Khajana, PM-Kisan, market prices, etc.) open in your device's browser or the in-app browser. Those websites are governed by their own privacy policies.
+
+### Advertising (Google AdMob)
+
+The App is monetised with ads served by **Google AdMob**. This is the only advertising SDK in the App.
+
+- **What Google receives:** to serve ads, Google collects the device's Advertising ID, IP address, approximated location derived from IP, ad interaction data, and similar device/browser identifiers, in accordance with the [Google Privacy Policy](https://policies.google.com/privacy) and [Google's technologies and partners list](https://www.google.com/policies/technologies/partners/). The developer receives only aggregated, non-identifying revenue reports â€” never data about you.
+- **Ad types shown:** an app-open ad when the App launches, a banner fixed at the bottom, interstitial ads between page navigations (frequency-capped), a native ad in the News feed, and **rewarded ads that appear only if you tap an export button** (PDF/PNG save). Rewarded ads are strictly opt-in and award only an in-app feature (the file export) â€” never cash or goods.
+- **Personalisation & opt-out:** ads may be personalised. You can opt out at any time via **Google Settings â†’ Ads â†’ Opt out of Ads Personalization** (or Play Store â†’ Settings â†’ Ads on newer devices), or through the ad personalisation controls shown inside ads (AdChoices).
+- **Ad content rating:** ad requests are configured for a general/parental-guidance content rating; the App is not directed at children and does not use child-directed ad settings.
 
 ## Information stored on your device
 
@@ -53,8 +62,8 @@ The App can show **local** notifications (news headlines, scheme tips, weather f
 
 ## Permissions the App uses
 
-- **Internet / network state** — to fetch public data listed above.
-- **Notifications, vibrate, boot completion, alarms** — to schedule and display local notifications.
+- **Internet / network state** â€” to fetch public data listed above.
+- **Notifications, vibrate, boot completion, alarms** â€” to schedule and display local notifications.
 
 The App requests **no** location, camera, microphone, contacts, SMS, phone, or file-picker permissions.
 
@@ -64,15 +73,15 @@ The share feature uses your device's built-in share sheet. Content is shared onl
 
 ## Data retention and deletion
 
-The developer operates **no servers** and holds **no user data**. To erase everything the App keeps, clear the App's storage (Android Settings → Apps → Assam Land Records → Storage → Clear storage) or uninstall the App.
+The developer operates **no servers** and holds **no user data**. To erase everything the App itself keeps, clear the App's storage (Android Settings â†’ Apps â†’ Assam Land Records â†’ Storage â†’ Clear storage) or uninstall the App. To reset or limit advertising identifiers used for ads, use **Google Settings â†’ Ads**.
 
 ## Children's privacy
 
-The App is suitable for general audiences and collects no personal data from anyone, including children.
+The App is suitable for general audiences and collects no personal data from anyone, including children. Ad requests are configured with a general/parental-guidance content rating and are **not** tagged for child-directed treatment.
 
 ## Security
 
-Because no personal data leaves your device, there is nothing for the developer to breach. Keep your device itself secure; land records fetched from the government portal are as sensitive as anything you choose to export or share.
+All land-record data, settings and exports remain on your device, so there is nothing for the developer to breach. The only data that leaves the device is what is described above (public content requests and the ad-related identifiers sent to Google AdMob). Keep your device itself secure; land records fetched from the government portal are as sensitive as anything you choose to export or share.
 
 ## Third-party services
 
@@ -81,6 +90,7 @@ Because no personal data leaves your device, there is nothing for the developer 
 | `ilrms.assam.gov.in` | Government of Assam | Land record searches |
 | `api.open-meteo.com` | Open-Meteo (open data) | Weather forecasts |
 | `rss2json.com` | RSS2JSON | News feed conversion |
+| Google AdMob / Google Mobile Ads | Google | Serving ads (see Advertising above) |
 | Google Fonts | Google | App typography (requests may include your IP) |
 
 ## Changes to this policy

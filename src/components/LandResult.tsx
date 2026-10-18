@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { ParsedRecord } from '../services/backend';
 import { useI18n } from '../i18n/I18nProvider';
 import { downloadPng, downloadPdf } from '../services/exportResult';
+import { showRewardGate } from '../services/ads';
 import {
   IconCopy, IconShare, IconDownload, IconImage, IconPdf, IconPrint,
 } from './Icon';
@@ -24,6 +25,18 @@ export default function LandResult({ r, onBack }: { r: ParsedRecord; onBack: () 
     if (!captureRef.current || busy) return;
     setBusy(kind);
     try {
+      // Opt-in rewarded ad gates the file export. If no ad is available the
+      // export proceeds anyway; closing the ad early cancels with a hint.
+      const gate = await showRewardGate(kind === 'pdf' ? 'rewarded' : 'rewardedInterstitial');
+      if (gate === 'closed') {
+        setToast(
+          lang === 'hi' ? 'पुरस्कार विज्ञापन पूरा करें — फिर से प्रयास करें'
+          : lang === 'as' ? 'পুৰস্কাৰ বিজ্ঞাপন সম্পূৰ্ণ কৰক — পুনৰ চেষ্টা কৰক'
+          : 'Watch the full ad to save — try again',
+        );
+        window.setTimeout(() => setToast(''), 4000);
+        return;
+      }
       const name = `${baseName}.${kind}`;
       const uri = kind === 'png'
         ? await downloadPng(captureRef.current, { filename: name })

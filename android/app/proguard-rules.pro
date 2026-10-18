@@ -42,3 +42,12 @@
     public static *** v(...);
     public static *** d(...);
 }
+
+# Google Mobile Ads (@capacitor-community/admob) — plugin classes are looked
+# up reflectively by the Capacitor bridge; keep them plus the GMA SDK entry
+# points (the SDK ships its own consumer rules for the rest).
+-keep class com.getcapacitor.community.admob.** { *; }
+-keep class com.google.android.gms.ads.** { *; }
+-keepclassmembers class * {
+    @com.getcapacitor.annotation.CapacitorPlugin *;
+}

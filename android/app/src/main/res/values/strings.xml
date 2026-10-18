@@ -4,4 +4,6 @@
     <string name="title_activity_main">Assam Land Records – Dharitre</string>
     <string name="package_name">in.assam.dharitree</string>
     <string name="custom_url_scheme">in.assam.dharitree</string>
+    <!-- Google AdMob application ID (required by the Google Mobile Ads SDK) -->
+    <string name="admob_app_id">ca-app-pub-1607968585289432~5173329767</string>
 </resources>

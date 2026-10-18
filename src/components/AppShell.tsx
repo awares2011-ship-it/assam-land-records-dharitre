@@ -50,11 +50,17 @@ export default function AppShell({ children }: { children: ReactNode }) {
       </header>
 
       <main className="flex-1">
-        <div className="max-w-xl mx-auto px-4 py-4 pb-24">{children}</div>
+        <div
+          className="max-w-xl mx-auto px-4 py-4"
+          style={{ paddingBottom: 'calc(6rem + var(--ad-banner-h, 0px))' }}
+        >
+          {children}
+        </div>
       </main>
 
       <nav
         className="safe-bottom fixed bottom-0 inset-x-0 z-20 bg-white/95 backdrop-blur border-t border-slate-100"
+        style={{ bottom: 'var(--ad-banner-h, 0px)' }}
         aria-label="Primary"
       >
         <div className="max-w-xl mx-auto flex">

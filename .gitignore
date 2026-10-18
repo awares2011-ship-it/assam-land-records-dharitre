@@ -27,3 +27,7 @@ android/app/keystore.properties
 android/app/google-services.json
 *.keystore
 *.jks
+
+android/build.pid
+tsconfig.app.tsbuildinfo
+releases/
