@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Assam Land Records – Dharitre</string>
+    <string name="title_activity_main">Assam Land Records – Dharitre</string>
+    <string name="package_name">in.assam.dharitree</string>
+    <string name="custom_url_scheme">in.assam.dharitree</string>
+</resources>

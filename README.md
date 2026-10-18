@@ -1,0 +1,89 @@
+# Assam Dharitree — Land Records Companion
+
+An **unofficial** citizen companion mobile app (React + TypeScript + Vite + Tailwind, Android via Capacitor) for Assam land-records services, farmers and landowners.
+
+> ⚠️ **This app does not replace the Government of Assam Dharitree portal.** Any legally relevant land record must be obtained from the official portal. The app does **not** scrape protected endpoints, bypass CAPTCHA, or fabricate ownership information.
+
+## Features
+
+- **Dashboard** with green/white Material-3-inspired tiles
+- **Land record search** with cascading **District → Circle → Village/Town** selection that opens the record on the official Dharitree portal (`ilrms.assam.gov.in/dhar`) via Capacitor Browser
+- **Offline land measurement calculator** (Bigha / Katha / Lecha / Acre / Hectare / sq ft / sq m) using Assam-specific factors + plot area calculator
+- **Weather** screen with 7-day forecast per Assam district (Open-Meteo, keyless)
+- **Government schemes** directory (PM-KISAN, Orunodoi, Mission Basundhara, PMAY-G, IGNOAPS, PMJAY, PMFBY, NMMS, MGNREGA, e-Khajana) with eligibility, benefits, documents and application steps
+- **News / local RSS reader** with Assam-focused feeds (NE Now Assam, PIB, IMD, etc.)
+- **Jamabandi / Basundhara / Bhunaksha / Mutation / e-Khajana** info pages with official links
+- **Stamp Duty estimator** and **EMI calculator**
+- **Assamese + English** language toggle persisted locally
+- **Searchable FAQ, Assamese glossary, Saved services, Feedback**
+
+## Tech
+
+- React 18, TypeScript, Vite 5
+- Tailwind CSS 3 (brand green palette + Noto Sans Assamese)
+- React Router 6 (hash router for Capacitor safety)
+- Capacitor 6 (Android) with `@capacitor/browser`, `@capacitor/share`, `@capacitor/preferences`
+
+## Architecture (land-record flow — same pattern as the Gujarat Satbara app)
+
+```
+┌────────────────────┐   JSON    ┌─────────────────────┐  HTML form POST  ┌──────────────────────┐
+│  Native app form   │ ───────▶  │   Node.js backend   │ ──────────────▶  │   Dharitree portal   │
+│  (one card, LTR)   │           │  (cookie-jar per    │                  │  ilrms.assam.gov.in  │
+│                    │ ◀─────── │   user session)     │ ◀────────────── │                      │
+│  Native result     │   JSON    │  Parses record HTML │  Record HTML +   │                      │
+│  renderer          │           │  → {fields,tables}  │  CAPTCHA image   │                      │
+└────────────────────┘           └─────────────────────┘                   └──────────────────────┘
+```
+
+- **CAPTCHA is relayed** to the app (as a `data:` URI loaded with the session's cookies) and solved by the user — nothing is bypassed.
+- One cookie-jar session per app user. Dropdowns cascade through the backend so the gov page always sees a valid `__hidden` state. 15-min idle TTL.
+- Record pages are parsed into typed `{title, fields[], tables[], source, fetchedAt}` and rendered in the app's own UI — no WebView, no portal chrome.
+
+## Scripts
+
+```bash
+# Frontend
+npm install            # install app deps
+npm run dev            # Vite dev server at http://localhost:5173
+npm run build          # production build in dist/
+npm run cap:sync       # build + sync into Android project
+npm run cap:open       # open Android Studio
+npm run android:build  # debug APK (Windows gradlew)
+
+# Backend (Node 20+)
+cd backend
+npm install            # express + cheerio + cors
+npm start              # http://localhost:3000
+```
+
+Set `VITE_BACKEND_URL=https://your-domain.in` for a production build so the APK knows where to find the backend.
+
+## Android (first-time setup)
+
+```bash
+npm install
+npx cap add android      # once
+npm run cap:sync
+npm run cap:open         # Android Studio opens the generated project
+```
+
+Set the app id in `capacitor.config.ts` and the display name there as well.
+
+## Data sources & attribution
+
+- Weather — [Open-Meteo](https://open-meteo.com/) (free, keyless)
+- News — public RSS via [rss2json](https://rss2json.com/) (NE Now, The Hindu, PIB, IMD)
+- Market prices — pointed to [Agmarknet](https://agmarknet.gov.in/) / e-NAM / ASAMB (no fabricated prices)
+- Land records — all record access is through the official **Dharitree** (`ilrms.assam.gov.in`) and **Mission Basundhara** portals
+
+## Google Play compliance notes
+
+- No ads shipped by default — enable AdMob only after confirming your Play Family / Government-service compliance.
+- No personal data uploaded; language and favourites use `localStorage`.
+- No scraping, no CAPTCHA bypass, no mocked ownership data.
+- Clear disclaimers on every page that touches a Government service.
+
+## Legal
+
+This is an independent app. “Assam”, “Dharitree”, “ILRMS” and “Mission Basundhara” are referenced only to identify the respective Government services; this app is not endorsed by or affiliated with the Government of Assam.

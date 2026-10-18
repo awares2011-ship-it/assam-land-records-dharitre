@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  /* Soft wash echoing the logo — violet in the top-left, pink in the top-right. */
+  background:
+    radial-gradient(1200px 400px at -10% -10%, #f3e8ff 0%, transparent 60%),
+    radial-gradient(900px 300px at 110% 0%,  #fce7f3 0%, transparent 55%),
+    #f8fafc;
+}
+
+.lang-as {
+  font-family: 'Noto Sans Assamese', 'Noto Serif Assamese', system-ui, sans-serif;
+}
+.lang-hi {
+  font-family: 'Noto Sans Devanagari', 'Noto Serif Devanagari', system-ui, sans-serif;
+}
+
+/* Card */
+.m3-card {
+  @apply bg-white rounded-2xl shadow-card border border-slate-100;
+}
+
+/* Primary chip */
+.chip-brand {
+  @apply inline-flex items-center gap-1 rounded-full bg-brand-50 text-brand-700 px-2.5 py-0.5 text-xs font-medium;
+}
+
+/* Button */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl px-4 py-2.5 transition active:scale-[0.98];
+}
+.btn-primary {
+  @apply btn bg-brand-600 text-white shadow-card hover:bg-brand-700;
+}
+.btn-ghost {
+  @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
+}
+.btn-danger {
+  @apply btn bg-rose-600 text-white hover:bg-rose-700;
+}
+
+/* Form */
+.input {
+  @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none;
+}
+.label {
+  @apply block text-sm font-medium text-slate-700 mb-1;
+}
+
+/* Safe area */
+.safe-top    { padding-top: max(env(safe-area-inset-top), 0.75rem); }
+.safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0.5rem); }
+
+/* Hide scrollbars for horizontal chip rows */
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* Toast fade-in */
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+.animate-fade-in { animation: toastIn 180ms ease-out both; }
+
+/* Jamabandi report table (sanitised HTML from gov page) */
+.jamabandi { font-size: 12px; color: #0f172a; }
+.jamabandi .jamabandi-report { padding: 8px; }
+.jamabandi table.report { border-collapse: collapse; width: 100%; }
+.jamabandi table.report th,
+.jamabandi table.report td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 8px;
+  vertical-align: top;
+  background: white;
+  text-align: left;
+}
+.jamabandi table.report thead th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 600;
+}
+.jamabandi .float-left { display: inline-block; margin-right: 1rem; }
+.jamabandi .float-clear { clear: both; display: block; }
+.jamabandi p { margin: 0 0 4px 0; }
+.jamabandi b { color: #334155; }
+
+/* Print — strip app chrome and expand the capture surface */
+@media print {
+  body { background: #fff !important; }
+  header, nav, .btn, .btn-primary, .btn-ghost, .btn-danger, .print\:hidden { display: none !important; }
+  .m3-card, article { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+  .print-area article { break-inside: avoid; }
+  main > div { max-width: 100% !important; padding: 0 !important; }
+}

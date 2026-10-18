@@ -1,0 +1,50 @@
+{
+  "name": "assam-land-records-dharitre",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Assam Land Records – Dharitre: unofficial land-records companion app for Assam (ILRMS Dharitree) in Assamese, English and Hindi.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 5173",
+    "lint": "eslint .",
+    "typecheck": "tsc -b --noEmit",
+    "cap:sync": "npm run build && cap sync android",
+    "cap:open": "cap open android",
+    "android:debug": "npm run build && cap sync android && cd android && gradlew.bat assembleDebug",
+    "android:release": "npm run build && cap sync android && cd android && gradlew.bat assembleRelease",
+    "android:bundle": "npm run build && cap sync android && cd android && gradlew.bat bundleRelease",
+    "android:clean": "cd android && gradlew.bat clean",
+    "android:build": "npm run android:debug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/app": "^6.0.1",
+    "@capacitor/browser": "^6.0.3",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/filesystem": "^6.0.4",
+    "@capacitor/local-notifications": "^6.1.3",
+    "@capacitor/preferences": "^6.0.2",
+    "@capacitor/share": "^6.0.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.11",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.6"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Assam Land Records – Dharitre",
+  "short_name": "Dharitre",
+  "description": "Search Assam land records, Jamabandi and Mutation; convert bigha/katha/lecha; Mission Basundhara, Bhunaksha, government schemes, weather and news — in Assamese, English and Hindi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8fafc",
+  "theme_color": "#7e22ce",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["government", "utilities", "productivity", "education"],
+  "icons": [
+    { "src": "/app-logo.webp", "sizes": "1248x1248", "type": "image/webp", "purpose": "any" },
+    { "src": "/app-logo.webp", "sizes": "1248x1248", "type": "image/webp", "purpose": "maskable" },
+    { "src": "/favicon.svg",   "sizes": "any",       "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Land record search", "short_name": "Search", "url": "/#/land-search" },
+    { "name": "Land calculator",    "short_name": "Calc",   "url": "/#/calculator" },
+    { "name": "Schemes",            "short_name": "Schemes","url": "/#/schemes" }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

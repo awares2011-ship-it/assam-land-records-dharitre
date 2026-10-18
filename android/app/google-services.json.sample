@@ -1,0 +1,1 @@
+{ "_comment": "Place a real google-services.json here if you add FCM. The gradle plugin applies itself automatically when this file is present (see build.gradle try/catch)." }
