@@ -5,6 +5,7 @@ import {
   IconSearch, IconReset, IconArrowLeft, IconInfo, IconDoc, IconMap, IconLayers,
 } from '../components/Icon';
 import AppLogo from '../components/AppLogo';
+import Disclaimer from '../components/Disclaimer';
 import { api, type FormState } from '../services/backend';
 
 type Step = 'district' | 'circle' | 'village' | 'details';
@@ -397,6 +398,8 @@ export default function LandSearch() {
           </StepCard>
         )}
       </div>
+
+      <Disclaimer className="mt-4" />
 
       {/* Sticky bottom action bar — hidden while the soft keyboard is open */}
       <div

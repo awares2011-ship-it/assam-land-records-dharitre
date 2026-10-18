@@ -76,11 +76,18 @@ Set the app id in `capacitor.config.ts` and the display name there as well.
 - News — public RSS via [rss2json](https://rss2json.com/) (NE Now, The Hindu, PIB, IMD)
 - Market prices — pointed to [Agmarknet](https://agmarknet.gov.in/) / e-NAM / ASAMB (no fabricated prices)
 - Land records — all record access is through the official **Dharitree** (`ilrms.assam.gov.in`) and **Mission Basundhara** portals
+- Ads — Google **AdMob** (app-open, banner, interstitial, rewarded, native) via `@capacitor-community/admob`
+
+## Source & links
+
+- **Source code:** https://github.com/awares2011-ship-it/assam-land-records-dharitre
+- **Privacy policy (live):** https://awares2011-ship-it.github.io/assam-land-records-dharitre/privacy-policy.html
+- **App id:** `in.assam.dharitree` · **Version:** 1.1.0
 
 ## Google Play compliance notes
 
-- No ads shipped by default — enable AdMob only after confirming your Play Family / Government-service compliance.
-- No personal data uploaded; language and favourites use `localStorage`.
+- AdMob integrated (`src/services/ads.ts`): frequency-capped interstitials, opt-in rewarded ads (in-app export only, no cash rewards), general/PG content rating, personalisation opt-out documented in the privacy policy.
+- No personal data uploaded by the app itself; language and favourites use `localStorage`. Google AdMob receives ad-related identifiers as documented in the privacy policy.
 - No scraping, no CAPTCHA bypass, no mocked ownership data.
 - Clear disclaimers on every page that touches a Government service.
 

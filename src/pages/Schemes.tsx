@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader';
 import { useI18n } from '../i18n/I18nProvider';
 import { schemes, schemeCategories, type SchemeCategory } from '../data/schemes';
 import { IconScheme, IconSearch } from '../components/Icon';
+import Disclaimer from '../components/Disclaimer';
 
 export default function Schemes() {
   const { t, lang } = useI18n();
@@ -74,6 +75,7 @@ export default function Schemes() {
           </Link>
         ))}
       </section>
+      <Disclaimer />
     </div>
   );
 }

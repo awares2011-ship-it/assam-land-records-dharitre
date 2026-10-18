@@ -24,8 +24,15 @@ export default function About() {
             ? 'এপে স্ক্ৰেপিং নকৰে, কেপচা অতিক্ৰম নকৰে বা মিছা মালিকানা তথ্য তৈয়াৰ নকৰে।'
             : 'The app does not scrape, bypass CAPTCHA, or fabricate ownership data.'}
         </p>
+        <p>
+          {lang === 'as'
+            ? 'এপৰ উৎস কোড আৰু গোপনীয়তা নীতি GitHub-ত উন্মুক্ত — সকলো তথ্যৰ উৎস ওলিখিত আছে।'
+            : 'The source code and privacy policy are open on GitHub — every data source used by the app is listed there.'}
+        </p>
       </section>
       <div className="flex flex-wrap gap-2">
+        <OfficialLink url="https://github.com/awares2011-ship-it/assam-land-records-dharitre" label={lang === 'as' ? 'উৎস কোড' : 'Source code'} variant="ghost" />
+        <OfficialLink url="https://awares2011-ship-it.github.io/assam-land-records-dharitre/privacy-policy.html" label={lang === 'as' ? 'গোপনীয়তা নীতি' : 'Privacy policy'} variant="ghost" />
         <OfficialLink url="https://ilrms.assam.gov.in/" label="ILRMS" variant="ghost" />
         <OfficialLink url="https://basundhara.assam.gov.in/" label="Mission Basundhara" variant="ghost" />
         <OfficialLink url="https://dlrs.assam.gov.in/" label="DLR Assam" variant="ghost" />

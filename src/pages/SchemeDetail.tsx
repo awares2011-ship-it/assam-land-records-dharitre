@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader';
 import OfficialLink from '../components/OfficialLink';
 import { useI18n } from '../i18n/I18nProvider';
 import { schemes } from '../data/schemes';
+import Disclaimer from '../components/Disclaimer';
 import { IconScheme } from '../components/Icon';
 
 export default function SchemeDetail() {
@@ -33,6 +34,7 @@ export default function SchemeDetail() {
         </span>
         <OfficialLink url={s.officialUrl} label={t('sch.apply')} />
       </div>
+      <Disclaimer />
     </div>
   );
 }
